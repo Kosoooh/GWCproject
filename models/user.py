@@ -2,7 +2,7 @@ from extensions import db
 
 
 class User(db.Model):
-    __tablename__ = 'user'
+    __tablename__ = "user"
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), nullable=False, unique=True)
@@ -12,7 +12,8 @@ class User(db.Model):
     created_at = db.Column(db.DateTime(), nullable=False, server_default = db.func.now())
     updated_at = db.Column(db.DateTime(), nullable=False, server_default = db.func.now(), onupdate = db.func.now())
 
-    spaces = db.relationship('Space', backref='user')
+    spaces = db.relationship("Space", backref="user")
+    reservations = db.relationship("Reservation", backref="user")
 
     @classmethod
     def get_by_username(cls, username):
@@ -25,3 +26,4 @@ class User(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+
