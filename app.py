@@ -5,7 +5,7 @@ from flask_restful import Api
 from config import Config
 from extensions import db
 from models.user import User
-from resources.space import SpaceListResource, SpaceResource, SpacePublishResource
+from resources.spaceresource import SpaceListResource, SpaceResource, SpacePublishResource
 
 
 def create_app():
