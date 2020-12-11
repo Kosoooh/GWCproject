@@ -13,7 +13,6 @@ black_list = set()
 
 class TokenResource(Resource):
 
-
     def post(self):
 
         data = request.get_json()

@@ -5,7 +5,7 @@ from flask_restful import Resource
 from utils import hash_password
 
 from schemas.user import UserSchema
-from schemas.space import SpaceSchema
+from schemas.spaceschema import SpaceSchema
 from schemas.reservation import ReservationSchema
 
 from webargs import fields
