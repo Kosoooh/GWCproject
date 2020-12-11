@@ -74,7 +74,7 @@ class SpaceResource(Resource):
         if space.is_publish == False and space.user_id != current_user:
             return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
 
-        return space.data(), HTTPStatus.OK
+        return space_schema.dump(space).data, HTTPStatus.OK
 
     @jwt_required
     def put(self, space_id):
