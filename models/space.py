@@ -6,8 +6,8 @@ class Space(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    reservations = db.Column(db.Nested(db.String()))
-    reservable = db.Column(db.Nested(db.String()))
+    reservations = db.Column(db.ARRAY(db.String()))
+    reservable = db.Column(db.ARRAY(db.String()))
     is_publish = db.Column(db.Boolean(), default=False)
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
     updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())
