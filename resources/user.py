@@ -12,6 +12,7 @@ from webargs import fields
 from webargs.flaskparser import use_kwargs
 
 from models.space import Space
+from models.reservation import Reservation
 from models.user import User
 
 space_list_schema = SpaceSchema(many=True)
