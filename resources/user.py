@@ -5,13 +5,14 @@ from flask_restful import Resource
 from utils import hash_password
 
 from schemas.user import UserSchema
-from schemas.space import SpaceSchema
+from schemas.spaceschema import SpaceSchema
 from schemas.reservation import ReservationSchema
 
 from webargs import fields
 from webargs.flaskparser import use_kwargs
 
 from models.space import Space
+from models.reservation import Reservation
 from models.user import User
 
 space_list_schema = SpaceSchema(many=True)

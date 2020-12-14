@@ -19,18 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
     <list default="true" id="b4e42f0f-a7d9-4af2-a6fa-eba741b8b53d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/token.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/token.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/user.py" afterDir="false" />
-=======
-    <list default="true" id="b4e42f0f-a7d9-4af2-a6fa-eba741b8b53d" name="Default Changelist" comment="Changes to spaceresource.py/spaceschema.py, added reservations to spaceschema and modified spaceresources get function return">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/space.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/space.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schemas/spaceschema.py" beforeDir="false" afterPath="$PROJECT_DIR$/schemas/spaceschema.py" afterDir="false" />
->>>>>>> 9c04ef116cf03e11935b96931ce2aea5b83d4f25
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +41,6 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -68,14 +60,6 @@
       <option name="presentableId" value="Default" />
       <updated>1607599476472</updated>
     </task>
-    <task id="LOCAL-00001" summary="Changes to spaceresource.py/spaceschema.py, added reservations to spaceschema and modified spaceresources get function return">
-      <created>1607681260621</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1607681260621</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -90,8 +74,14 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Changes to spaceresource.py/spaceschema.py, added reservations to spaceschema and modified spaceresources get function return" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes to spaceresource.py/spaceschema.py, added reservations to spaceschema and modified spaceresources get function return" />
+  <component name="WindowStateProjectService">
+    <state x="729" y="362" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607603138467">
+      <screen x="72" y="27" width="1848" height="1173" />
+    </state>
+    <state x="729" y="362" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/72.27.1848.1173@72.27.1848.1173" timestamp="1607603138467" />
+    <state x="485" y="248" width="1022" height="737" key="SettingsEditor" timestamp="1607600616878">
+      <screen x="72" y="27" width="1848" height="1173" />
+    </state>
+    <state x="485" y="248" width="1022" height="737" key="SettingsEditor/72.27.1848.1173@72.27.1848.1173" timestamp="1607600616878" />
   </component>
 </project>
