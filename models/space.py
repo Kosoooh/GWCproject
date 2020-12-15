@@ -1,28 +1,18 @@
 from extensions import db
 
 
-
 class Space(db.Model):
     __tablename__ = 'space'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-<<<<<<< HEAD
+
     reservations = db.Column(db.ARRAY(db.String()))
     reservableTimes = db.Column(db.ARRAY(db.String()))
-    is_reserved = db.Column(db.Boolean(), default=False)
-    created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())
-=======
-    reservations = db.Column(db.ARRAY(db.ForeignKey("reservation.name")))
-    reservable = db.Column(db.ARRAY(db.String()))
     is_publish = db.Column(db.Boolean(), default=False)
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
     updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())
-    user_id = db.Column(db.Integer(), db.ForeignKey("user.id"))
 
-    reservation = db.relationship("Reservation", backref="space")
->>>>>>> 8e803528e35a4f8b486d132cca467ccc011177c7
 
     @classmethod
     def get_all_published(cls):
@@ -40,8 +30,7 @@ class Space(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-<<<<<<< HEAD
-=======
+
     @classmethod
     def get_all_by_user(cls, user_id, visibility='public'):
         if visibility == 'public':
@@ -52,4 +41,4 @@ class Space(db.Model):
 
         else:
             return cls.query.filter_by(user_id=user_id).all()
->>>>>>> 8e803528e35a4f8b486d132cca467ccc011177c7
+
