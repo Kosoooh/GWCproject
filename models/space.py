@@ -7,7 +7,7 @@ class Space(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    reservations = db.Column(db.ARRAY(db.String()), db.ForeignKey("reservation.name"))
+    reservations = db.Column(db.ARRAY(db.ForeignKey("reservation.name")))
     reservable = db.Column(db.ARRAY(db.String()))
     is_publish = db.Column(db.Boolean(), default=False)
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
