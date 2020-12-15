@@ -1,12 +1,13 @@
 from extensions import db
 #
 
+
 class Space(db.Model):
     __tablename__ = 'space'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    reservations = db.Column(db.ARRAY(db.String()))
+    reservations = db.Column(db.ARRAY(db.String()), db.ForeignKey("reservation.name"))
     reservable = db.Column(db.ARRAY(db.String()))
     is_publish = db.Column(db.Boolean(), default=False)
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
@@ -14,7 +15,6 @@ class Space(db.Model):
     user_id = db.Column(db.Integer(), db.ForeignKey("user.id"))
 
     reservation = db.relationship("Reservation", backref="space")
-
 
     @classmethod
     def get_all_published(cls):
@@ -31,7 +31,6 @@ class Space(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
-
 
     @classmethod
     def get_all_by_user(cls, user_id, visibility='public'):
