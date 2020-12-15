@@ -4,13 +4,14 @@ from extensions import db
 class Space(db.Model):
     __tablename__ = 'space'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    reservableTimes = db.Column(db.ARRAY(db.String()))
-    is_publish = db.Column(db.Boolean(), default=False)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    name = db.Column(db.String(100), unique=True)
+    reservableTimes = db.Column(db.ARRAY(db.String()), default=["16", "17", "18", "19", "20"])
+    is_publish = db.Column(db.Boolean(), default=True)
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
     updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())
 
+    reservations = db.relationship("Reservation", backref="space")
 
     @classmethod
     def get_all_published(cls):

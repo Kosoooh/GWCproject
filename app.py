@@ -5,7 +5,7 @@ from resources.token import TokenResource, RefreshResource, RevokeResource, blac
 from config import Config
 from extensions import db, jwt
 from models.user import User
-from resources.spaceresource import SpaceListResource, SpaceResource, SpacePublishResource
+from resources.spaceresource import SpaceListResource, SpaceResource
 from resources.user import UserResource, UserListResource, MeResource, UserReservationListResource
 from resources.reservation import ReservationListResource, ReservationResource
 
@@ -37,7 +37,6 @@ def register_resources(app):
 
     api.add_resource(SpaceListResource, '/spaces')
     api.add_resource(SpaceResource, '/spaces/<int:space_id>')
-    api.add_resource(SpacePublishResource, '/spaces/<int:space_id>/publish')
     api.add_resource(TokenResource, "/token")
     api.add_resource(RefreshResource, "/refresh")
     api.add_resource(RevokeResource, "/revoke")

@@ -1,4 +1,5 @@
 from schemas.user import UserSchema
+from schemas.spaceschema import SpaceSchema
 from marshmallow import Schema, fields, post_dump, validate, validates, ValidationError
 
 
@@ -17,7 +18,7 @@ class ReservationSchema(Schema):
     is_published= fields.Boolean(dump_only=True)
     created_at = fields.DateTime(dump_only=True)
     updated_at = fields.DateTime(dump_only=True)
-
+    roomID = fields.Nested(SpaceSchema, attribute="space", dump_only=True, only=["id"])
     reserved_by = fields.Nested(UserSchema, attribute='user', dump_only=True, only=['id', 'username'])
 
     @post_dump(pass_many=True)
