@@ -1,22 +1,20 @@
 from extensions import db
 
 
-
 class Reservation(db.Model):
 
-    __tablename__ = 'reservation'
+    __tablename__ = "reservation"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    is_publish = db.Column(db.Boolean(), default=False)
+    reservationTime = db.Column(db.String(64))
+    is_published = db.Column(db.Boolean(), default=True)
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
     updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())
     user_id = db.Column(db.Integer(), db.ForeignKey("user.id"))
 
-
     @classmethod
     def get_all_published(cls):
-        return cls.query.filter_by(is_publish=True).all()
+        return cls.query.filter_by(is_published=True).all()
 
     @classmethod
     def get_by_id(cls, reservation_id):

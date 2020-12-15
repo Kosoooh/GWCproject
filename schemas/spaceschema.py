@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields, post_dump, validate, validates, ValidationError
 from schemas.user import UserSchema
-from schemas.reservations import ReservationSchema
+from schemas.reservation import ReservationSchema
 
 
 class SpaceSchema(Schema):

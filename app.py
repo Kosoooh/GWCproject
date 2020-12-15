@@ -7,6 +7,7 @@ from extensions import db, jwt
 from models.user import User
 from resources.spaceresource import SpaceListResource, SpaceResource, SpacePublishResource
 from resources.user import UserResource, UserListResource, MeResource, UserReservationListResource
+from resources.reservation import ReservationListResource, ReservationResource
 
 
 def create_app():
@@ -43,8 +44,11 @@ def register_resources(app):
     api.add_resource(UserResource, "/users/<string:username>")
     api.add_resource(UserReservationListResource, "/users/<string:username>/reservations")
     api.add_resource(UserListResource, "/users")
+    api.add_resource(MeResource, "/me")
+    api.add_resource(ReservationResource, '/reservations/<int:reservation_id>')
+    api.add_resource(ReservationListResource, "/reservations")
 
 
 if __name__ == '__main__':
     app = create_app()
-    app.run()
+    app.run(port=5000, debug=True)

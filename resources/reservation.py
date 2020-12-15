@@ -4,6 +4,7 @@ from http import HTTPStatus
 from flask_jwt_extended import get_jwt_identity, jwt_required, jwt_optional
 from models.reservation import Reservation
 from schemas.reservation import ReservationSchema
+from resources.spaceresource import SpaceListResource
 
 reservation_schema = ReservationSchema()
 reservation_list_schema = ReservationSchema(many=True)
@@ -69,7 +70,7 @@ class ReservationResource(Resource):
 
         current_user = get_jwt_identity()
 
-        if reservation.is_publish == False and reservation.user_id != current_user:
+        if reservation.is_reserved == False and reservation.user_id != current_user:
             return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
 
         return reservation_schema.dump(reservation).data, HTTPStatus.OK
@@ -77,6 +78,8 @@ class ReservationResource(Resource):
     @jwt_required
     def put(self, reservation_id):
         json_data = request.get_json()
+
+        current_user = get_jwt_identity()
 
         reservation = Reservation.get_by_id(reservation_id=reservation_id)
 
@@ -88,7 +91,7 @@ class ReservationResource(Resource):
         if current_user != reservation.user_id:
             return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
 
-        reservation.name = json_data['name']
+        reservation.name = json_data[current_user]
 
         reservation.save()
 
@@ -106,43 +109,10 @@ class ReservationResource(Resource):
         if current_user != reservation.user_id:
             return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
 
+        reservation.is_reserved = False
+
+        SpaceListResource.patch(reservation.roomID)
         reservation.delete()
 
         return {}, HTTPStatus.NO_CONTENT
 
-
-class ReservationPublishResource(Resource):
-
-    @jwt_required
-    def put(self, reservation_id):
-        reservation = Reservation.get_by_id(reservation_id=reservation_id)
-
-        if reservation is None:
-            return {'message': 'Reservation not found'}, HTTPStatus.NOT_FOUND
-
-        current_user = get_jwt_identity()
-
-        if current_user != reservation.user_id:
-            return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
-
-        reservation.is_publish = True
-        reservation.save()
-
-        return {}, HTTPStatus.NO_CONTENT
-
-    @jwt_required
-    def delete(self, reservation_id):
-        reservation = Reservation.get_by_id(reservation_id=reservation_id)
-
-        if reservation is None:
-            return {'message': 'Reservation not found'}, HTTPStatus.NOT_FOUND
-
-        current_user = get_jwt_identity()
-
-        if current_user != reservation.user_id:
-            return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
-
-        reservation.is_publish = False
-        reservation.save()
-
-        return {}, HTTPStatus.NO_CONTENT

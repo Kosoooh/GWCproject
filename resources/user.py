@@ -54,7 +54,8 @@ class UserResource(Resource):
         if current_user == user.id:  # User can only get his own account information.
             data = user_schema.dump(user).data
 
-        # Shouldn't need a "current_user is None" check because we have jwt_required
+        if current_user is None:
+            return {"message": "method not allowed"}, HTTPStatus.FORBIDDEN
 
         return data, HTTPStatus.OK
 
@@ -88,7 +89,7 @@ class UserListResource(Resource):
         return user_schema.dump(user).data, HTTPStatus.CREATED
 
 
-class MeResource(Resource):  # Not necessarily a class that we need but it can be deleted later if we want to
+class MeResource(Resource):
 
     @jwt_required
     def get(self):
