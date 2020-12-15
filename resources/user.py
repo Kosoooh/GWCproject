@@ -20,8 +20,6 @@ reservation_list_schema = ReservationSchema(many=True)
 user_schema = UserSchema()
 reservation_schema = ReservationSchema()
 
-# git testi
-
 
 class UserReservationListResource(Resource):
     @jwt_required
@@ -45,7 +43,7 @@ class UserReservationListResource(Resource):
 
 class UserResource(Resource):
     @jwt_required
-    def get(self, username):
+    def get(self, username): # toimii
         user = User.get_by_username(username=username)
 
         if user is None:
@@ -54,10 +52,10 @@ class UserResource(Resource):
         current_user = get_jwt_identity()
 
         if current_user == user.id:  # User can only get his own account information.
-            data = user_schema.dump(user).data
+            data = reservation_schema.dump(user).data
 
-        if current_user is None:
-            return {"message": "method not allowed"}, HTTPStatus.FORBIDDEN
+        else:
+            data = {"message": "method not allowed"}, HTTPStatus.FORBIDDEN
 
         return data, HTTPStatus.OK
 
@@ -91,10 +89,12 @@ class UserListResource(Resource):
         return user_schema.dump(user).data, HTTPStatus.CREATED
 
 
-class MeResource(Resource):
+class MeResource(Resource): # Users can check their reservations with this
 
     @jwt_required
     def get(self):
         user = User.get_by_id(id=get_jwt_identity())
 
-        return reservation_schema.dump(user).data, HTTPStatus.OK
+        instructions = Reservation.get_all_by_user(user_id=user.id)
+
+        return reservation_list_schema.dump(instructions).data, HTTPStatus.OK

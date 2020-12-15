@@ -11,7 +11,7 @@ class ReservationSchema(Schema):
     created_at = fields.DateTime(dump_only=True)
     updated_at = fields.DateTime(dump_only=True)
 
-#    author = fields.Nested(UserSchema, attribute='user', dump_only=True, only=['id', 'username'])
+    reserved_by = fields.Nested(UserSchema, attribute='user', dump_only=True, only=['id', 'username'])
 
     @post_dump(pass_many=True)
     def wrap(self, data, many, **kwargs):

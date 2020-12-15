@@ -61,8 +61,8 @@ class ReservationListResource(Resource):
 
 class ReservationResource(Resource):
 
-    @jwt_optional
-    def get(self, reservation_id):
+    @jwt_required
+    def get(self, reservation_id):  # toimii, muttei välttämättä tarpeellinen
         reservation = Reservation.get_by_id(reservation_id=reservation_id)
 
         if reservation is None:
@@ -70,7 +70,7 @@ class ReservationResource(Resource):
 
         current_user = get_jwt_identity()
 
-        if reservation.is_reserved == False and reservation.user_id != current_user:
+        if reservation.user_id != current_user:
             return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
 
         return reservation_schema.dump(reservation).data, HTTPStatus.OK
@@ -98,7 +98,7 @@ class ReservationResource(Resource):
         return reservation.data(), HTTPStatus.OK
 
     @jwt_required
-    def delete(self, reservation_id):
+    def delete(self, reservation_id):  # toimii
         reservation = Reservation.get_by_id(reservation_id=reservation_id)
 
         if reservation is None:
@@ -109,9 +109,6 @@ class ReservationResource(Resource):
         if current_user != reservation.user_id:
             return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
 
-        reservation.is_reserved = False
-
-        SpaceListResource.patch(reservation.roomID)
         reservation.delete()
 
         return {}, HTTPStatus.NO_CONTENT
