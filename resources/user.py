@@ -20,6 +20,8 @@ reservation_list_schema = ReservationSchema(many=True)
 user_schema = UserSchema()
 reservation_schema = ReservationSchema()
 
+# git testi
+
 
 class UserReservationListResource(Resource):
     @jwt_required
