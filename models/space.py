@@ -1,5 +1,5 @@
 from extensions import db
-#
+
 
 
 class Space(db.Model):
