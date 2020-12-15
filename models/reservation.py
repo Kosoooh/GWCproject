@@ -6,6 +6,7 @@ class Reservation(db.Model):
     __tablename__ = "reservation"
 
     id = db.Column(db.Integer, primary_key=True)
+
     reservationTime = db.Column(db.String(64))
     is_published = db.Column(db.Boolean(), default=True)
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())

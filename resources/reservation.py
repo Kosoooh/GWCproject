@@ -12,13 +12,13 @@ reservation_list_schema = ReservationSchema(many=True)
 
 class ReservationListResource(Resource):
 
-    def get(self):
+    def get(self): # tällä admin voisi nähdä listan kaikista reservationeista
         reservations = Reservation.get_all_published()
 
         return reservation_list_schema.dump(reservations).data, HTTPStatus.OK
 
     @jwt_required
-    def post(self):
+    def post(self): # toimii
         json_data = request.get_json()
         current_user = get_jwt_identity()
 
@@ -33,8 +33,11 @@ class ReservationListResource(Resource):
 
         return reservation_schema.dump(reservation).data, HTTPStatus.CREATED
 
+
+class ReservationResource(Resource):
+
     @jwt_required
-    def patch(self, reservation_id):
+    def patch(self, reservation_id): # toimii
         json_data = request.get_json()
 
         data, errors = reservation_schema.load(data=json_data, partial=('name',))
@@ -52,14 +55,11 @@ class ReservationListResource(Resource):
         if current_user != reservation.user_id:
             return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
 
-        reservation.name = data.get('name') or reservation.name
+        reservation.reservationTime = data.get('reservationTime') or reservation.reservationTime
 
         reservation.save()
 
         return reservation_schema.dump(reservation).data, HTTPStatus.OK
-
-
-class ReservationResource(Resource):
 
     @jwt_required
     def get(self, reservation_id):  # toimii, muttei välttämättä tarpeellinen
@@ -74,28 +74,6 @@ class ReservationResource(Resource):
             return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
 
         return reservation_schema.dump(reservation).data, HTTPStatus.OK
-
-    @jwt_required
-    def put(self, reservation_id):
-        json_data = request.get_json()
-
-        current_user = get_jwt_identity()
-
-        reservation = Reservation.get_by_id(reservation_id=reservation_id)
-
-        if reservation is None:
-            return {'message': 'Reservation not found'}, HTTPStatus.NOT_FOUND
-
-        current_user = get_jwt_identity()
-
-        if current_user != reservation.user_id:
-            return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
-
-        reservation.name = json_data[current_user]
-
-        reservation.save()
-
-        return reservation.data(), HTTPStatus.OK
 
     @jwt_required
     def delete(self, reservation_id):  # toimii
